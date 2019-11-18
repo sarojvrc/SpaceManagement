@@ -10,9 +10,47 @@
                 Confirm Password: <input type="password" placeholder="Reenter Password" id="conpassword"><br><br>
                 Mobile No: <input type="tel" maxlength="10" placeholder="Enter Mobile" id="mobile"><br><br>
                 Email Id: <input type="email" placeholder="Enter email" id="email"><br><br>
-                <button type="submit">Signup</button> &nbsp; &nbsp; <button type="reset">Reset</button><br><br>
+                <button type="submit" onclick="signupuser()">Signup</button> &nbsp; &nbsp; <button type="reset">Reset</button><br><br>
                 Already have an account: <a href="home.html">Login Here</a>
             </form>
         </center>
+        <script>
+            function signupuser(){
+                event.preventDefault();
+
+                var cname = document.getElementById('companyname').value;
+                var compassword = document.getElementById('cpassword').value;
+                var concompass = document.getElementById('conpassword').value;
+                var mobile = document.getElementById('mobile').value;
+                var email = document.getElementById('email').value;
+
+                var companydata = {
+                    cname:cname,
+                    compassword:compassword,
+                    concompass:concompass,
+                    mobile:mobile,
+                    email:email
+                }
+
+                if(localStorage.getItem('userdetails') == null){
+                    localStorage.setItem('userdetails',JSON.stringify([]));
+                    var userData=JSON.parse(getItem('userdetails'));
+                    console.log('userData', userData);
+                    userData.push(JSON.stringify(companydata));
+                    var arreytostr = JSON.stringify(userData);
+                    console.log('arreytostr', arreytostr);
+                }
+                else
+                {
+                    var userDetailsArray = JSON.parse(localStorage.getItem('userdetails'));
+                    userDetailsArray.push(JSON.stringify(companydata));
+                    console.log(userDetailsArray);
+                    localStorage.setItem('userdetails', JSON.stringify(userDetailsArray));
+                }
+
+
+                
+            }
+        </script>
     </body>
 </html>
