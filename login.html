@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <title>Office Space Management</title>
+        <style>
+            body{
+                background-image: url('images/login.jpg');
+                background-size: cover;
+            }
+            label,form{
+                color: whitesmoke;
+            }
+            a{
+                font-size: x-large;
+                color: #f178dc;
+                text-decoration: none;
+            }
+            i{
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="text-align: center; color: whitesmoke; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Office Space Management</h1>
+        <center>
+            <h2 style="color: whitesmoke;">Login Here</h2>
+            <form>
+                <label>Company Name: </label>
+                <input type="text" placeholder="Enter Company Name" id="cname">
+                <i id="cnameerror"></i><br><br>
+                <label>Password: </label>
+                <input type="password" placeholder="Enter Password" id="cpass">
+                <i id="passerror"></i><br><br>
+                <label>User Type: </label>
+                <select id="user_type">
+                    <option selected disabled>Choose Type</option>
+                    <option value="admin">Admin</option>
+                    <option value="customer">Customer</option>
+                </select> <br><br>
+                <button type="submit" onclick="login()">Login</button> &nbsp; &nbsp;
+                <button type="reset">Reset</button><br><br>
+                    New Company Registration Here: <a href="signup.html">Sign Up</a>
+            </form>
+            <h3>Back to <a href="homepage.html">Home</a> </h3>
+        </center>
+        <script>
+            function login(){
+                event.preventDefault();
+                var usertype = document.getElementById('user_type').value;
+                var companyName = document.getElementById('cname').value;
+                var password = document.getElementById('cpass').value;
+
+                companyName = companyName.trim();
+                password = password.trim();
+
+
+                // if (usertype === "admin"){
+                //     alert("You are choosing Admin");
+                //     location.href="admin.html";
+                // }
+                // if (usertype === "customer"){
+                //     alert("You are choosing Customer");
+                //     location.href="customer.html";
+                // }
+                
+                if(companyName=="")
+                {
+                    document.getElementById('cname').style.borderColor="red";
+                    document.getElementById('cnameerror').innerHTML="Invalid Name";
+                }
+                else{
+                    document.getElementById('cname').style.borderColor="green";
+                    document.getElementById('cnameerror').innerHTML="";
+                }
+                //===============================================================
+                if(password == ""){
+                    document.getElementById('cpass').style.borderColor="red";
+                    document.getElementById('passerror').innerHTML="Invalid password";
+                }
+                else{
+                    document.getElementById('cpass').style.borderColor="green";
+                    document.getElementById('passerror').innerHTML="";
+                }
+                
+            }
+            
+        </script>
+    </body>
+</html>

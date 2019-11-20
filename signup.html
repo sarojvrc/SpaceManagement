@@ -1,18 +1,38 @@
 <html>
+    <head>
+        <title>Signup Page</title>
+        <style>
+            body{
+                background-image: url('images/login.jpg');
+                background-size: cover;
+            }
+            label,form{
+                color: whitesmoke;
+            }
+            a{
+                font-size: x-large;
+                color: #f178dc;
+                text-decoration: none;
+            }
+            i{
+                color: red;
+            }
+        </style>
+    </head>
     <body>
-        <h1 style="text-align: center;">Office Space Management</h1>
-        
+        <h1 style="text-align: center; color: whitesmoke; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Office Space Management</h1>
         <center>
-            <h2>Company Registration Form</h2>
+            <h2 style="color: whitesmoke;">Company Registration Form</h2>
             <form>
-                Company Name: <input type="text" placeholder="Enter company name" id="companyname"><br><br>
-                Password: <input type="password" placeholder="Enter Password" id="cpassword"><br><br>
-                Confirm Password: <input type="password" placeholder="Reenter Password" id="conpassword"><br><br>
-                Mobile No: <input type="tel" maxlength="10" placeholder="Enter Mobile" id="mobile"><br><br>
-                Email Id: <input type="email" placeholder="Enter email" id="email"><br><br>
+                Company Name: <input type="text" placeholder="Enter company name" id="companyname"><i id="nameerror"></i><br><br>
+                Password: <input type="password" placeholder="Enter Password" id="cpassword"><i id="passerror"></i><br><br>
+                Confirm Password: <input type="password" placeholder="Reenter Password" id="conpassword"><i id="cpasserror"></i><br><br>
+                Mobile No: <input type="tel" maxlength="10" placeholder="Enter Mobile" id="mobile"><i id="moberror"></i><br><br>
+                Email Id: <input type="email" placeholder="Enter email" id="email"><i id="emailerror"></i><br><br>
                 <button type="submit" onclick="signupuser()">Signup</button> &nbsp; &nbsp; <button type="reset">Reset</button><br><br>
-                Already have an account: <a href="home.html">Login Here</a>
+                Already have an account: <a href="login.html">Login Here</a>
             </form>
+            <h3>Back to <a href="homepage.html">Home</a> </h3>
         </center>
         <script>
             function signupuser(){
@@ -23,15 +43,20 @@
                 var concompass = document.getElementById('conpassword').value;
                 var mobile = document.getElementById('mobile').value;
                 var email = document.getElementById('email').value;
-
+                //Removing spaces from left and right side if given by user.
+                cname = cname.trim();
+                compassword = compassword.trim();
+                concompass = concompass.trim();
+                mobile = mobile.trim();
+                email = email.trim();
+                //localstorage
                 var companydata = {
                     cname:cname,
                     compassword:compassword,
-                    concompass:concompass,
+                    // concompass:concompass,
                     mobile:mobile,
                     email:email
                 }
-
                 if(localStorage.getItem('userdetails') == null){
                     localStorage.setItem('userdetails',JSON.stringify([]));
                     var userData=JSON.parse(getItem('userdetails'));
@@ -46,10 +71,54 @@
                     userDetailsArray.push(JSON.stringify(companydata));
                     console.log(userDetailsArray);
                     localStorage.setItem('userdetails', JSON.stringify(userDetailsArray));
+                }   
+
+                //Validation
+                //for name
+                if(cname == ""){
+                    document.getElementById('companyname').style.borderColor = "red";
+                    document.getElementById('nameerror').innerHTML = "Invalid name";
                 }
-
-
-                
+                else{
+                    document.getElementById('companyname').style.borderColor = "green";
+                    document.getElementById('nameerror').innerHTML = "";
+                }
+                //for password
+                if(compassword == ""){
+                    document.getElementById('cpassword').style.borderColor = "red";
+                    document.getElementById('passerror').innerHTML = "Invalid Pasword";
+                }
+                else{
+                    document.getElementById('cpassword').style.borderColor = "green";
+                    document.getElementById('passerror').innerHTML = "";
+                }
+                //for confirm pass
+                if(concompass == ""){
+                    document.getElementById('conpassword').style.borderColor = "red";
+                    document.getElementById('cpasserror').innerHTML = "Invalid Confirm Pasword";
+                }
+                else{
+                    document.getElementById('conpassword').style.borderColor = "green";
+                    document.getElementById('cpasserror').innerHTML = "";
+                }
+                //for email
+                if(email == ""){
+                    document.getElementById('email').style.borderColor = "red";
+                    document.getElementById('emailerror').innerHTML = "Invalid email";
+                }
+                else{
+                    document.getElementById('email').style.borderColor = "green";
+                    document.getElementById('emailerror').innerHTML = "";
+                }
+                //for mobile
+                if(mobile == ""){
+                    document.getElementById('mobile').style.borderColor = "red";
+                    document.getElementById('moberror').innerHTML = "Invalid Mobile";
+                }
+                else{
+                    document.getElementById('mobile').style.borderColor = "green";
+                    document.getElementById('moberror').innerHTML = "";
+                }
             }
         </script>
     </body>
